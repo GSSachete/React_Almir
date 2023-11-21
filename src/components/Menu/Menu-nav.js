@@ -50,6 +50,7 @@ const menu_nav = () => {
           </div>
         </div>
       </nav>
+      
     )
 }
 export default menu_nav;

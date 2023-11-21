@@ -1,5 +1,6 @@
 import Menu  from '../src/components/Menu/Menu';
 import Login from '../src/components/Login/Login';
+import Register from './components/Login/register';
 import './App.css';
 /*
 function App() {
@@ -30,7 +31,7 @@ function App() {
   return (
     
     <div className="App">
-        <Login/>
+        <Register/>
     </div>
    /*
  <div className="App">
