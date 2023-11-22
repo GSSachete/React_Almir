@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
-import styles from './Register.module.css'
+import styles from './register.module.css'
 const register = () => {
     return(
 <section className="vh-100">
@@ -25,18 +25,20 @@ const register = () => {
            
            
        
-        <form className="mt-1">
+        <form className="mt-1" >
        
         <div className="form-group mb-3">
           <label className="form-label" for="nome">Nome</label>
-            <input type="text" name="nome" id="nome" required className="form-control form-control-lg"
+            <input type="text" name="nome" id="nome" required   className="form-control form-control-lg"
               placeholder="Nome" />
+              
           </div>
           
           <div className="form-outline mb-3">
             <label className="form-label" for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" minlength="11" maxLength="11" required  className="form-control form-control-lg"
+            <input type="text" name="cpf" id="cpf" minlength="11" maxlength="11" required  className="form-control form-control-lg"
               placeholder="CPF" />
+                
           </div>
           
 
@@ -72,7 +74,7 @@ const register = () => {
           
 
           <div className="text-center text-lg-start mt-4 pt-2">
-            <button type="button" className="btn btn-primary btn-lg "
+            <button type="submit" className="btn btn-primary btn-lg "
              >Criar conta</button>
            
           </div>
