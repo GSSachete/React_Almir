@@ -7,10 +7,7 @@ const Attcliente = () => {
 <section className="vh-100">
   <div className="container-fluid h-custom">
   <div className="row d-flex justify-content-center align-items-center h-100 ">
-      <div className="col-md-9 col-lg-6 col-xl-5 ">
-        <img src="https://a.espncdn.com/i/teamlogos/soccer/500-dark/2029.png"
-          className="img-fluid" alt="Sample image"/>
-      </div>
+      
       <div className= "col-md-8 col-lg-6 col-xl-4 offset-xl-1 my-3">
       
       <div className="d-flex flex-row">
