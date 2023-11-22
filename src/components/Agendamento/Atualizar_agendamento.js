@@ -66,7 +66,7 @@ const Attagendamento= () => {
         
         
                   <div className="text-center text-lg-start mt-4 pt-2">
-                  <button type="button" class="btn btn-success">Cadastrar</button>
+                  <button type="button" class="btn btn-success">Atuliazar</button>
                    
                   </div>
                 </form>
