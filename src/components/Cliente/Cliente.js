@@ -18,29 +18,31 @@ const cliente = () => {
       <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Criar Cliente<br/> </p>
             
             </div>
+
+
         <form className="mt-1">
         <div className="form-outline mb-3">
-            <label className="form-label" for="sexo">Sexo</label>
+             <label className="form-label" for="sexo">Sexo</label>
             <div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
-  <label class="form-check-label" for="exampleRadios1">
-    Masulino
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
-  <label class="form-check-label" for="exampleRadios2">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
+        <label class="form-check-label" >
+    Masculino
+    </label>
+         </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" />
+            <label class="form-check-label" >
     Feminino
-  </label>
-  
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
-  <label class="form-check-label" for="exampleRadios2">
+     </label>
+        
+    </div>
+        <div class="form-check">
+     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" />
+     <label class="form-check-label" >
     Honda civic 2006
-  </label>
+    </label>
   
-</div>
+    </div>
 
           </div>
         <div className="form-group mb-3">
