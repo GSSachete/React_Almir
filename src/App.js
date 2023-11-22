@@ -1,7 +1,7 @@
 import Menu  from '../src/components/Menu/Menu';
+import Footer  from '../src/components/footer';
 import Login from '../src/components/Login/Login';
 import Register from './components/Login/register';
-import './App.css';
 /*
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
@@ -31,7 +31,8 @@ function App() {
   return (
     
     <div className="App">
-        <Register/>
+        <Login/>
+        <Footer/>
     </div>
    /*
  <div className="App">

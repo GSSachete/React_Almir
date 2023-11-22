@@ -1,80 +1,103 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js'
-const login = () => {
-    return(
-<section class="vh-100">
-  <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://a.espncdn.com/i/teamlogos/soccer/500-dark/2029.png"
-          class="img-fluid" alt="Sample image"/>
+import 'bootstrap/dist/js/bootstrap.min.js';
+import logo from '../Images/logo.png';
+
+const Login = () => {
+  const [cpfCnpj, setCpfCnpj] = useState('');
+  const [senha, setSenha] = useState('');
+  const [manterLogin, setManterLogin] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+
+  };
+
+  return (
+    <section className="align-middle">
+      <div className="container-fluid h-custom vh-100 ">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-md-9 col-lg-6 col-xl-5">
+            <img src={logo} className="img-fluid" alt="Sample image" />
+          </div>
+          <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form className="needs-validation" noValidate onSubmit={handleSubmit}>
+              <div className={`form-outline mb-4 ${formSubmitted && cpfCnpj.length < 11 ? 'was-validated' : ''}`}>
+                <label className="form-label" htmlFor="cpf_cnpj">
+                  CPF/CNPJ
+                </label>
+                <input
+                  type="text"
+                  id="cpf_cnpj"
+                  className={`form-control form-control-lg ${
+                    formSubmitted && cpfCnpj.length < 11 ? 'is-invalid' : ''
+                  }`}
+                  placeholder="Digite seu CPF ou CNPJ Registrado"
+                  value={cpfCnpj}
+                  onChange={(e) => setCpfCnpj(e.target.value)}
+                  required
+                  minLength="11"
+                />
+                {formSubmitted && cpfCnpj.length < 11 && (
+                  <div className="invalid-feedback">O CPF ou CNPJ deve ter no mínimo 11 caracteres.</div>
+                )}
+              </div>
+
+              <div className={`form-outline mb-3 ${formSubmitted && senha.length === 0 ? 'was-validated' : ''}`}>
+                <label className="form-label" htmlFor="senha">
+                  Senha
+                </label>
+                <input
+                  type="password"
+                  id="senha"
+                  className={`form-control form-control-lg ${
+                    formSubmitted && senha.length === 0 ? 'is-invalid' : ''
+                  }`}
+                  placeholder="Digite sua senha"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+                {formSubmitted && senha.length === 0 && (
+                  <div className="invalid-feedback">Por favor, digite sua senha.</div>
+                )}
+              </div>
+
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="form-check mb-0">
+                  <input
+                    className="form-check-input me-2"
+                    type="checkbox"
+                    value={manterLogin}
+                    id="form2Example3"
+                    onChange={() => setManterLogin(!manterLogin)}
+                  />
+                  <label className="form-check-label" htmlFor="form2Example3">
+                    Manter Login
+                  </label>
+                </div>
+                <a href="#!" className="text-body">
+                  Esqueceu sua senha?
+                </a>
+              </div>
+
+              <div className="text-center text-lg-start mt-4 pt-2">
+                <button type="submit" className="btn btn-primary btn-lg">
+                  Login
+                </button>
+                <p className="small fw-bold mt-2 pt-1 mb-0">
+                  Não tem uma conta? <a href="#!" className="link-danger">
+                    Registrar-se
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form>
-       
-          
-          <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Enter a valid email address" />
-            <label class="form-label" for="form3Example3">Email</label>
-          </div>
+    </section>
+  );
+};
 
-       
-          <div class="form-outline mb-3">
-            <input type="password" id="form3Example4" class="form-control form-control-lg"
-              placeholder="Enter password" />
-            <label class="form-label" for="form3Example4">Senha</label>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center">
-            
-            <div class="form-check mb-0">
-              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" for="form2Example3">
-                Manter Login
-              </label>
-            </div>
-            <a href="#!" class="text-body">Esqueceu sua senha?</a>
-          </div>
-
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-primary btn-lg"
-             >Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Não tem uma conta? <a href="#!"
-                class="link-danger">Registrar-se</a></p>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-  <div
-    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary fixed-bottom">
- 
-    <div class="text-white mb-3 mb-md-0 ">
-      Agend.io.
-    </div>
-
-
-    
-    <div>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="#!" class="text-white">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </div>
-   
-  </div>
-</section>
-    )
-  }
-  export default login;
+export default Login;
