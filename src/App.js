@@ -3,6 +3,7 @@ import Footer  from '../src/components/footer';
 import Login from '../src/components/Login/Login';
 import Register from './components/Login/register';
 import Attcliente from './components/Cliente/AtualizarCliente';
+import Listar_cliente from './components/Cliente/Listagem_cliente';
 
 /*
 function App() {
@@ -33,7 +34,7 @@ function App() {
   return (
     
     <div className="App">
-        <Attcliente/>
+        <Listar_cliente/>
       
     </div>
    /*
