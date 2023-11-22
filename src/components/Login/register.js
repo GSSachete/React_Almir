@@ -17,28 +17,23 @@ const register = () => {
         
             <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Criar conta<br/> </p>
             
-            </div>
-           
-       
-         
+            </div>      
 
            
            
        
-        <form className="mt-1" >
+        <form className="mt-1">
        
         <div className="form-group mb-3">
           <label className="form-label" for="nome">Nome</label>
-            <input type="text" name="nome" id="nome" required   className="form-control form-control-lg"
+            <input type="text" name="nome" id="nome" required className="form-control form-control-lg"
               placeholder="Nome" />
-              
           </div>
           
           <div className="form-outline mb-3">
             <label className="form-label" for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" minlength="11" maxlength="11" required  className="form-control form-control-lg"
+            <input type="text" name="cpf" id="cpf" minlength="11" maxLength="11" required  className="form-control form-control-lg"
               placeholder="CPF" />
-                
           </div>
           
 
@@ -74,7 +69,7 @@ const register = () => {
           
 
           <div className="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" className="btn btn-primary btn-lg "
+            <button type="button" className="btn btn-primary btn-lg "
              >Criar conta</button>
            
           </div>

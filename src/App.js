@@ -2,6 +2,7 @@ import Menu  from '../src/components/Menu/Menu';
 import Footer  from '../src/components/footer';
 import Login from '../src/components/Login/Login';
 import Register from './components/Login/register';
+import Attcliente from './components/Cliente/AtualizarCliente';
 
 /*
 function App() {
@@ -32,8 +33,8 @@ function App() {
   return (
     
     <div className="App">
-        <Login/>
-        <Footer/>
+        <Attcliente/>
+      
     </div>
    /*
  <div className="App">

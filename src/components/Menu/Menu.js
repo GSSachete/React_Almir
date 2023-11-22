@@ -1,8 +1,8 @@
-import Menu_nav from "./Menu-nav";
+import attcliente from "../Cliente/AtualizarCliente";
 const menu = () =>{
     return (
         <div>
-            <Menu_nav />
+            <attcliente />
         </div>
         
     )
