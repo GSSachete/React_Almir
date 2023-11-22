@@ -12,7 +12,7 @@ const CadastrarAgendamento = () => {
       
       <div className="d-flex flex-row">
         
-      <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Cadastrar serviço<br/> </p>
+      <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Cadastrar agendamento<br/> </p>
             
             </div>
         <form className="mt-1">
