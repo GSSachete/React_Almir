@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
-import styles from './Register.module.css'
-const register = () => {
+import styles from '../Cliente/Cliente.module.css'
+const cliente = () => {
     return(
 <section className="vh-100">
   <div className="container-fluid h-custom">
@@ -15,18 +15,34 @@ const register = () => {
       
       <div className="d-flex flex-row">
         
-            <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Criar conta<br/> </p>
+      <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Criar Cliente<br/> </p>
             
             </div>
-           
-       
-         
-
-           
-           
-       
         <form className="mt-1">
-       
+        <div className="form-outline mb-3">
+            <label className="form-label" for="sexo">Sexo</label>
+            <div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
+  <label class="form-check-label" for="exampleRadios1">
+    Masulino
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+  <label class="form-check-label" for="exampleRadios2">
+    Feminino
+  </label>
+  
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+  <label class="form-check-label" for="exampleRadios2">
+    Honda civic 2006
+  </label>
+  
+</div>
+
+          </div>
         <div className="form-group mb-3">
           <label className="form-label" for="nome">Nome</label>
             <input type="text" name="nome" id="nome" required className="form-control form-control-lg"
@@ -46,30 +62,12 @@ const register = () => {
               placeholder="Email" />
           </div>
 
-       
-          <div className="form-outline mb-3">
-            <label className="form-label" for="senha">Senha</label>
-            <input type="password" name="senha"id="senha" required className="form-control form-control-lg"
-              placeholder="Senha" />
-          </div>
-          
-          
-          <div className="form-outline mb-3">
-            <label className="form-label" for="confsenha">Confirme sua senha</label>
-            <input type="password" name = "confsenha"id="confsenha" required className="form-control form-control-lg"
-              placeholder="Confirme sua senha" />
-          </div>
 
           <div className="form-outline mb-3 ">
             <label className="form-label" for="form3Example4">Data de nascimento</label>
             <input type="date" id="form3Example4" required className="form-control form-control-lg"
               />
           </div>
-     
-
-        
-          
-          
 
           <div className="text-center text-lg-start mt-4 pt-2">
             <button type="button" className="btn btn-primary btn-lg "
@@ -109,4 +107,4 @@ const register = () => {
 </section>
     )
   }
-  export default register;
+  export default cliente;
