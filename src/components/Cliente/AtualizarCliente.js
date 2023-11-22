@@ -21,13 +21,13 @@ const Attcliente = () => {
         <div className="form-outline mb-3">
              <label className="form-label" for="sexo">Sexo</label>
             <div class="form-check">
-        <input class="form-check-input" type="radio" name="sexo" id="sexo" value="option1" checked/>
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
         <label class="form-check-label" >
     Masculino
     </label>
          </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="sexo" id="sexo" />
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" />
             <label class="form-check-label" >
     Feminino
      </label>
@@ -49,7 +49,7 @@ const Attcliente = () => {
           </div>
           
           <div className="form-outline mb-3">
-             <label className="form-label" for="sexo">Tipo Pessoa</label>
+             <label className="form-label" for="sexo">Tipo pessoa</label>
             <div class="form-check">
         <input class="form-check-input" type="radio" name="tipopessoa" id="tipopessoa" value="option1" checked/>
         <label class="form-check-label" >
@@ -65,13 +65,11 @@ const Attcliente = () => {
     </div>
  
     </div>
-    <div className="form-outline mb-3">
-            <label className="form-label" for="cpf">CNPJ</label>
-            <input type="text" name="cpf" id="cpf" minlength="11" maxLength="11" required  className="form-control form-control-lg"
-              placeholder="CPF" />
-          </div>
+
+
+
           
-        <div className="form-outline mb-3">
+          <div className="form-outline mb-3">
             <label className="form-label" for="cpf">CPF</label>
             <input type="text" name="cpf" id="cpf" minlength="11" maxLength="11" required  className="form-control form-control-lg"
               placeholder="CPF" />
