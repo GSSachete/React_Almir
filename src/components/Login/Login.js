@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import logo from '../Images/logo.png';
@@ -6,13 +8,37 @@ import logo from '../Images/logo.png';
 const Login = () => {
   const [cpfCnpj, setCpfCnpj] = useState('');
   const [senha, setSenha] = useState('');
-  const [manterLogin, setManterLogin] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
+    if ((cpfCnpj.length < 11 || cpfCnpj.length > 14  )|| senha.length === 0) {
+      return;
+    }
+    try {
+      const response = await axios.post('http://localhost:3000/auth', {
+        cpf_cnpj: cpfCnpj,
+        senha: senha,
+      });
+      const data = response.data;
     
+      if (response.status === 200) {
+        console.log(data);
+        Cookies.set('token', data.token);
+        Cookies.set('id_loja', data.id_loja);
+      } else {
+        console.error(data.error);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        const data = error.response.data;
+        alert(data.error);
+        console.error(data.error);
+      } else {
+        console.error('Erro ao fazer a requisição de login:', error.message);
+      }
+    }
   };
 
   return (
@@ -39,6 +65,7 @@ const Login = () => {
                   onChange={(e) => setCpfCnpj(e.target.value)}
                   required
                   minLength="11"
+                  maxLength="14"
                 />
                 {formSubmitted && cpfCnpj.length < 11 && (
                   <div className="invalid-feedback">O CPF ou CNPJ deve ter no mínimo 11 caracteres.</div>
@@ -69,11 +96,9 @@ const Login = () => {
                   <input
                     className="form-check-input me-2"
                     type="checkbox"
-                    value={manterLogin}
-                    id="form2Example3"
-                    onChange={() => setManterLogin(!manterLogin)}
+                    id="materlogin" 
                   />
-                  <label className="form-check-label" htmlFor="form2Example3">
+                  <label className="form-check-label" htmlFor="materlogin">
                     Manter Login
                   </label>
                 </div>
