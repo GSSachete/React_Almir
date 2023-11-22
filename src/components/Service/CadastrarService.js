@@ -12,7 +12,7 @@ const CadastrarService = () => {
       
       <div className="d-flex flex-row">
         
-      <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Atualizar Cliente<br/> </p>
+      <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Cadastrar serviço<br/> </p>
             
             </div>
         <form className="mt-1">
@@ -33,7 +33,7 @@ const CadastrarService = () => {
           </div>
        
           <div className="text-center text-lg-start mt-4 pt-2">
-          <button type="button" class="btn btn-success">Atualizar Cliente</button>
+          <button type="button" class="btn btn-success">Cadastrar</button>
            
           </div>
         </form>
