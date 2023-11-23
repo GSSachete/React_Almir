@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import styles from './register.module.css'
 import logo from '../Images/logo.png';
 import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 const Register = () => {
     const [nome, setNome] = useState('');
@@ -169,22 +170,20 @@ const Register = () => {
             </div>
             <div className={`form-group mb-3 ${Inputvalido() ? 'was-validated' : ''}`}>
                 <label className="form-label" htmlFor="cpfCnpj">
-                    {tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
+                {tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
                 </label>
-                <input
-                    type="text"
-                    name="cpfCnpj"
-                    id="cpfCnpj"
-                    required
-                    className={`form-control form-control-lg ${Inputvalido() ? 'is-invalid' : ''}`}
-                    placeholder={tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
-                    value={cpfCnpj}
-                    onChange={(e) => setCpfCnpj(e.target.value)}
-                    minLength={tipoPessoa === 'F' ? '11' : '14'}
-                    maxLength={tipoPessoa === 'F' ? '11' : '14'}
+                <InputMask
+                mask={tipoPessoa === 'F' ? '999.999.999-99' : '99.999.999/9999-99'}
+                maskChar={null}
+                id="cpfCnpj"
+                required
+                className={`form-control form-control-lg ${Inputvalido() ? 'is-invalid' : ''}`}
+                placeholder={tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
+                value={cpfCnpj}
+                onChange={(e) => setCpfCnpj(e.target.value)}
                 />
                 {Inputvalido() && (
-                    <div className="invalid-feedback">{MensagemInvalido()}</div>
+                <div className="invalid-feedback">{MensagemInvalido()}</div>
                 )}
             </div>
             <div className={`form-group mb-3 ${formSubmit && cep.length < 8  ? 'was-validated' : ''}`}>

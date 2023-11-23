@@ -34,6 +34,7 @@ function App() {
   return (
     
     <div className="App">
+        <Menu/>
         <Listar_cliente/>
       
     </div>
