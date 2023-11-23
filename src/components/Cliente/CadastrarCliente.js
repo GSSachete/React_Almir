@@ -68,7 +68,7 @@ const Cliente = () => {
         if (error.response && error.response.status === 401) {
           const data = error.response.data;
           alert(data.error);
-          history.push('/login');
+         // history.push('/login');
         } else {
           console.error('Erro ao fazer a requisição de loja:', error.message);
         }
