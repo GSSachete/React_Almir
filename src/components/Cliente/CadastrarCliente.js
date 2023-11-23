@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
-import styles from './register.module.css'
-import logo from '../Images/logo.png';
-import { Link } from 'react-router-dom';
-import InputMask from 'react-input-mask';
+import styles from '../Cliente/Cliente.module.css'
 import estados from '../estados';
-const Register = () => {
+const Cliente = () => {
     const [nome, setNome] = useState('');
     const [tipoPessoa, setTipoPessoa] = useState('F');
     const [cpfCnpj, setCpfCnpj] = useState('');
@@ -18,7 +16,7 @@ const Register = () => {
     const [cep, setCep] = useState('');
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [sexo, setSexo] = useState('');
     const [formSubmit, setFormSubmit] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -32,27 +30,33 @@ const Register = () => {
           estado.length === 0 ||
           cep.length !== 8 ||
           telefone.length === 0 ||
-          email.length === 0 ||
-          senha.length === 0
+          email.length === 0
       ) {
           return;
       }
-      const lojaBody = {
-          nome: nome,
-          rua: rua,
-          numero: numero,
-          cidade: cidade,
-          estado: estado,
-          cep: cep,
-          telefone: telefone,
-          email: email,
-          senha: senha,
-          tipo_pessoa: tipoPessoa,
-          cpf: tipoPessoa === 'F' ? cpfCnpj : null,
-          cnpj: tipoPessoa === 'J' ? cpfCnpj : null
+    const id_loja = Cookies.get('id_loja');
+    const token = Cookies.get('token');
+      const clienteBody = {
+        id_loja: id_loja,
+        nome: nome,
+        rua: rua,
+        numero: numero,
+        cidade: cidade,
+        estado: estado,
+        cep: cep,
+        telefone: telefone,
+        email: email,
+        tipo_pessoa: tipoPessoa,
+        cpf: tipoPessoa === 'F' ? cpfCnpj : null,
+        cnpj: tipoPessoa === 'J' ? cpfCnpj : null,
+        sexo: sexo
       };
       try {
-        const response = await axios.post('http://localhost:3000/loja',lojaBody);
+        const response = await axios.post('http://localhost:3000/cliente',clienteBody, {
+            headers: {
+              Authorization: `Bearer ${token}`, 
+            },
+          });
         const data = response.data;
       
         if (response.status === 201) {
@@ -61,10 +65,10 @@ const Register = () => {
           console.error(data.error);
         }
       } catch (error) {
-        if (error.response && error.response.status === 409) {
+        if (error.response && error.response.status === 401) {
           const data = error.response.data;
           alert(data.error);
-          console.error(data.error);
+          history.push('/login');
         } else {
           console.error('Erro ao fazer a requisição de loja:', error.message);
         }
@@ -93,21 +97,15 @@ const Register = () => {
         return '';
     };
     return(
-    <section className="vh-100">
-      <div className="container-fluid h-custom">
-      <div className="row d-flex justify-content-center align-items-center h-100 ">
-          <div className="col-md-9 col-lg-6 col-xl-5 ">
-            <img src={logo}
-              className="img-fluid" alt="Sample image"/>
-          </div>
-          <div className= "col-md-8 col-lg-6 col-xl-4 offset-xl-1 my-3">
-          
-          <div className="d-flex flex-row">
-        
-            <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Criar conta<br/> </p>
-            
-            </div>    
-        <form className="mt-1" noValidate onSubmit={handleSubmit}>
+<section className="vh-100">
+  <div className="container-fluid h-custom">
+  <div className="row d-flex justify-content-center align-items-center h-100 ">
+      <div className= "col-md-8 col-lg-6 col-xl-4 my-3">
+      
+        <div className="d-flex flex-row">
+            <p className={"lead fw-normal me-3 " + styles["estiloletra"]}>Cadastrar Cliente<br/> </p>
+        </div>
+        <form className="mt-1"  noValidate onSubmit={handleSubmit}>
             <div className={`form-group mb-3 ${formSubmit && nome.length === 0 ? 'was-validated' : ''}`}>
                 <label className="form-label" htmlFor="nome">
                     Nome
@@ -128,6 +126,27 @@ const Register = () => {
                     <div className="invalid-feedback">O nome não pode estar vazio.</div>
                 )}
             </div>
+            <div className={`form-group mb-3 ${formSubmit && sexo.length === 0 ? 'was-validated' : ''}`}>
+                <label className="form-label" htmlFor="sexo">
+                    Sexo
+                </label>
+                <select
+                    id="sexo"
+                    name="sexo"
+                    value={sexo}
+                    onChange={(e) => setSexo(e.target.value)}
+                    required
+                    className={`form-select form-select-lg ${formSubmit && sexo.length === 0 ? 'is-invalid' : ''}`}
+                >
+                    <option value="" disabled>Selecione o sexo...</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="O">Outro</option>
+                </select>
+                {formSubmit && sexo.length === 0 && (
+                    <div className="invalid-feedback">Por favor, selecione o sexo.</div>
+                )}
+            </div>
             <div className="form-check form-switch mb-3">
                 <input
                     type="checkbox"
@@ -144,9 +163,7 @@ const Register = () => {
                 <label className="form-label" htmlFor="cpfCnpj">
                 {tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
                 </label>
-                <InputMask
-                mask={tipoPessoa === 'F' ? '999.999.999-99' : '99.999.999/9999-99'}
-                maskChar={null}
+                <input
                 id="cpfCnpj"
                 required
                 className={`form-control form-control-lg ${Inputvalido() ? 'is-invalid' : ''}`}
@@ -301,42 +318,18 @@ const Register = () => {
             )}
         </div>
 
-       
-        <div className={`form-group mb-3 ${formSubmit && senha.length > 0 ? 'was-validated' : ''}`}>
-            <label className="form-label" htmlFor="senha">
-                Senha
-            </label>
-            <input
-                type="password"
-                name="senha"
-                id="senha"
-                required
-                className={`form-control form-control-lg ${formSubmit && senha.length === 0 ? 'is-invalid' : ''}`}
-                placeholder="Senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-            />
-            {formSubmit && senha.length === 0 && (
-                <div className="invalid-feedback">A senha é obrigatória.</div>
-            )}
+        <div className="text-center text-lg-start mt-4 pt-2">
+        <button type="submit" className="btn btn-primary btn-lg "
+            >Cadastrar</button>
+        
         </div>
-
-  
-          <div className="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" className="btn btn-primary btn-lg "
-             >Criar conta</button>
-            <p className="small fw-bold mt-2 pt-1 mb-0">
-                  Já tem uma conta? <Link to="/login" className="link-danger">
-                      Entrar
-                    </Link>
-                </p>
-          </div>
 
         </form>
       </div>
     </div>
   </div>
+
 </section>
     )
   }
-  export default Register;
+  export default Cliente;
