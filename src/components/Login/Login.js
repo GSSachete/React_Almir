@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import logo from '../Images/logo.png';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [cpfCnpj, setCpfCnpj] = useState('');
@@ -112,9 +113,9 @@ const Login = () => {
                   Login
                 </button>
                 <p className="small fw-bold mt-2 pt-1 mb-0">
-                  Não tem uma conta? <a href="#!" className="link-danger">
-                    Registrar-se
-                  </a>
+                  Não tem uma conta? <Link to="/register" className="link-danger">
+                      Registrar-se
+                    </Link>
                 </p>
               </div>
             </form>
