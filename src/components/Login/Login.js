@@ -4,9 +4,10 @@ import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import logo from '../Images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [cpfCnpj, setCpfCnpj] = useState('');
   const [senha, setSenha] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -28,6 +29,7 @@ const Login = () => {
         console.log(data);
         Cookies.set('token', data.token);
         Cookies.set('id_loja', data.id_loja);
+        navigate('/home');
       } else {
         console.error(data.error);
       }

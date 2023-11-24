@@ -1,25 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import estados from '../estados';
+import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
+import { Link, useNavigate } from 'react-router-dom';
 
-const listar_services = () => {
+const Listar_services = () => {
+    const navigate = useNavigate();
+    const [id_cliente, setId_cliente] = useState('');
+    const [nome, setNome] = useState('');
+    const [preco, setPreco] = useState('');
+    const [servicos, setServicos] = useState([]);
+
+    const handleFiltroSubmit = async (e) => {
+      e.preventDefault();
+      const id_loja = (Cookies.get('id_loja'));
+      const token = Cookies.get('token');
+      const servicoBody = {
+        id_loja,
+        nome,
+        preco
+      };
+      const parametros = Object.fromEntries(
+        Object.entries(servicoBody).filter(([chave, valor]) => valor !== "" && valor !== null)
+      );
+      try {
+        const response = await axios.post('http://localhost:3000/servico/listar', parametros, {
+            headers: {
+              Authorization: `Bearer ${token}`, 
+            },
+          });
+        console.log(response.data)
+        setServicos(response.data);
+      } catch (error) {
+          if (error.response && error.response.status === 401) {
+              const data = error.response.data;
+              alert(data.error);
+              navigate('/login');
+            } else {
+              console.error('Erro ao fazer a requisição de loja:', error.message);
+            }
+      }
+    }
     return(
       <div>
             <div className="mx-3 mt-4 shadow p-3 ">
-                <form>
+                <form onSubmit={handleFiltroSubmit}>
                     <div className="row">
                     <div className="col-md-2 mb-3">
-                        <label htmlFor="id" className="form-label">ID</label>
-                        <input type="text" className="form-control" id="id" placeholder="Filtrar por ID" />
-                    </div>
-                    <div className="col-md-3 mb-3">
-                        <label htmlFor="nome" className="form-label">Nome</label>
-                        <input type="text" className="form-control" id="nome" placeholder="Filtrar por Nome" />
-                    </div>
-                    <div className="col-md-3 mb-3">
-                        <label htmlFor="nome" className="form-label">Preço</label>
-                        <input type="text" className="form-control" id="preço" placeholder="Filtrar por Preço" />
-                    </div>
+                    <label htmlFor="id" className="form-label">ID</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="id"
+                        placeholder="Filtrar por ID"
+                        value={id_cliente}
+                        onChange={(e) => setId_cliente(e.target.value)}
+                    />
+                </div>
+
+                <div className="col-md-3 mb-3">
+                    <label htmlFor="nome" className="form-label">Nome</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="nome"
+                        placeholder="Filtrar por Nome"
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
+                    />
+                </div>
+
+                <div className="col-md-3 mb-3">
+                    <label htmlFor="preco" className="form-label">Preço</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="preco"
+                        placeholder="Filtrar por Preço"
+                        value={preco}
+                        onChange={(e) => setPreco(e.target.value)}
+                    />
+                </div>
                     <div className="row d-flex justify-content-end">    
                         <div className="col-md-4 mb-3">
                             <button type="submit" className="btn btn-primary">Aplicar Filtros</button>
@@ -31,53 +94,33 @@ const listar_services = () => {
         </div>
 
 
-<table class="table table-striped">
+<table class="table table-striped my-4 mx-3">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Nome</th>
       <th scope="col">Preço</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      
-
+    {servicos.map((servico) => (
+    <tr key={servico.id_servico}>
+      <td>{servico.id_servico}</td>
+      <td>{servico.nome}</td>
+      <td>{servico.preco}</td>
         <div class="d-flex">
-            <a class="btn btn-secondary mx-1" href="#">Atualizar</a>
-        
-            <a class="btn btn-danger mx-1 " href="#">Deletar</a>
-            </div>        
-    
+          <Link className="btn btn-secondary mx-1" to={`/servico/atualizar/${servico.id_servico}`}>
+              Atualizar
+          </Link>
+          <Link className="btn btn-danger mx-1" to={`/servico/deletar/${servico.id_servico}`}>
+              Deletar
+          </Link>
+        </div>        
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    
-      <div class="d-flex">
-            <a class="btn btn-secondary mx-1" href="#">Atualizar</a>
-        
-            <a class="btn btn-danger mx-1" href="#">Deletar</a>
-            </div>       
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry the Bird</td>
-      <td >The Bird</td>
-    
-      <div class="d-flex">
-            <a class="btn btn-secondary mx-1" href="#">Atualizar</a>
-        
-            <a class="btn btn-danger mx-1" href="#">Deletar</a>
-            </div>       
-    </tr>
+    ))}
   </tbody>
 </table>
 </div>
     )
 }
-export default listar_services;
+export default Listar_services;

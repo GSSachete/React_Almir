@@ -1,3 +1,4 @@
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
 
@@ -15,25 +16,22 @@ const menu_nav = () => {
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Agendar</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Cadastrar</a></li>
-                  <li><a class="dropdown-item" href="#">Atualizar</a></li>
-                  <li><a class="dropdown-item" href="#">Listagem</a></li>
+                  <li><Link class="dropdown-item" to="/agendamento/cadastro">Cadastrar</Link></li>
+                  <li><Link class="dropdown-item" to="/agendamento/listar">Listagem</Link></li>
                 </ul>
               </li>
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Cadastrar</a></li>
-                  <li><a class="dropdown-item" href="#">Atualizar</a></li>
-                  <li><a class="dropdown-item" href="#">Listagem</a></li>
+                  <li><Link class="dropdown-item" to="/servico/cadastro">Cadastrar</Link></li>
+                  <li><Link class="dropdown-item" to="/servico/listar">Listagem</Link></li>
                 </ul>
               </li>
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Cadastrar</a></li>
-                  <li><a class="dropdown-item" href="#">Atualizar</a></li>
-                  <li><a class="dropdown-item" href="#">Listagem</a></li>
+                  <li><Link class="dropdown-item" to="/cliente/cadastro">Cadastrar</Link></li>
+                  <li><Link class="dropdown-item" to="/cliente/listar">Listagem</Link></li>
                 </ul>
               </li>
               <li class="nav-item dropdown mx-2">

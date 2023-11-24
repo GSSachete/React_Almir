@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import styles from '../Cliente/Cliente.module.css'
 import estados from '../estados';
+import { Link, useNavigate } from 'react-router-dom';
 const Cliente = () => {
+    const navigate = useNavigate();
     const [nome, setNome] = useState('');
     const [tipoPessoa, setTipoPessoa] = useState('F');
     const [cpfCnpj, setCpfCnpj] = useState('');
@@ -37,7 +39,7 @@ const Cliente = () => {
     const id_loja = Cookies.get('id_loja');
     const token = Cookies.get('token');
       const clienteBody = {
-        id_loja: id_loja,
+        id_loja: (id_loja),
         nome: nome,
         rua: rua,
         numero: numero,
@@ -61,6 +63,7 @@ const Cliente = () => {
       
         if (response.status === 201) {
           alert(data.message)
+          navigate('/cliente/listar');
         } else {
           console.error(data.error);
         }
@@ -68,9 +71,9 @@ const Cliente = () => {
         if (error.response && error.response.status === 401) {
           const data = error.response.data;
           alert(data.error);
-         // history.push('/login');
+          navigate('/login');
         } else {
-          console.error('Erro ao fazer a requisição de loja:', error.message);
+          console.error('Erro ao fazer a requisição de cliente:', error.message);
         }
       }
     };
@@ -168,6 +171,7 @@ const Cliente = () => {
                 required
                 className={`form-control form-control-lg ${Inputvalido() ? 'is-invalid' : ''}`}
                 placeholder={tipoPessoa === 'F' ? 'CPF' : 'CNPJ'}
+                maxLength={tipoPessoa === 'F' ? '11' : '14'}
                 value={cpfCnpj}
                 onChange={(e) => setCpfCnpj(e.target.value)}
                 />
