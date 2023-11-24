@@ -12,6 +12,9 @@ import CadService from './components/Service/CadastrarService';
 import ListService from './components/Service/Listagem_services';
 import AttService from './components/Service/AtualizarService';
 import CadAgendamento from './components/Agendamento/Cadastrar_agendamento';
+import ListAgendamento from './components/Agendamento/Listagem_agendamento';
+import AttAgendamento from './components/Agendamento/Atualizar_agendamento';
+import RelatorioAgendamento from './components/Relatorio/RelatorioAgendamento';
 function App() {
   useEffect(() => {
     const token = Cookies.get('token');
@@ -32,6 +35,7 @@ function App() {
             element={
               <>
                 <Menu />
+                <ListAgendamento/>
               </>
             }
           />
@@ -95,6 +99,33 @@ function App() {
               <>
                 <Menu />
                 <CadAgendamento />
+              </>
+            }
+          />
+          <Route
+            path="/agendamento/listar"
+            element={
+              <>
+                <Menu />
+                <ListAgendamento />
+              </>
+            }
+          />
+          <Route
+            path="/agendamento/atualizar/:id_agendamento"
+            element={
+              <>
+                <Menu />
+                <AttAgendamento />
+              </>
+            }
+          />
+          <Route
+            path="/relatorio/agendamento"
+            element={
+              <>
+                <Menu />
+                <RelatorioAgendamento />
               </>
             }
           />

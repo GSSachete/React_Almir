@@ -17,10 +17,10 @@ const Listar_cliente = () => {
     const [email, setEmail] = useState('');
     const [clientes, setClientes] = useState([]);
 
+    const id_loja = (Cookies.get('id_loja'));
+    const token = Cookies.get('token');
     const handleFiltroSubmit = async (e) => {
         e.preventDefault();
-        const id_loja = (Cookies.get('id_loja'));
-        const token = Cookies.get('token');
         const tipoDocumento = cpfcnpj.length <= 11 ? 'cpf' : 'cnpj';
         const clienteBody = {
             id_loja,
@@ -53,6 +53,34 @@ const Listar_cliente = () => {
               }
         }
       };
+      const handleDeletarClick = async (id_cliente) => {
+        const confirmarDelecao = window.confirm('Tem certeza que deseja deletar este cliente?');
+
+        if (confirmarDelecao) {
+            try {
+                const response = await axios.delete(`http://localhost:3000/cliente/${id_cliente}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (response.status === 201) {
+                    alert('Deletado com sucesso!')
+                    navigate('/cliente/listar');
+                  }
+            } catch (error) {
+                console.error('Erro ao deletar cliente:', error);
+
+                if (error.response && error.response.status === 401) {
+                    const data = error.response.data;
+                    alert(data.error);
+                    navigate('/login');
+                } else {
+                    alert('Erro ao deletar o cliente. Por favor, tente novamente.');
+                }
+            }
+        }
+    };
     return(
         <div>
             <div className="mx-3 mt-4 shadow p-3 ">
@@ -152,9 +180,12 @@ const Listar_cliente = () => {
                     <Link className="btn btn-secondary mx-1" to={`/cliente/atualizar/${cliente.id_cliente}`}>
                         Atualizar
                     </Link>
-                    <Link className="btn btn-danger mx-1" to={`/cliente/deletar/${cliente.id_cliente}`}>
+                    <button
+                        className="btn btn-danger mx-1"
+                        onClick={() => handleDeletarClick(cliente.id_cliente)}
+                    >
                         Deletar
-                    </Link>
+                    </button>
                     </div>
                 </td>
                 </tr>

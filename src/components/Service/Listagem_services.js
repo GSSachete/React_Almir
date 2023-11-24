@@ -12,11 +12,10 @@ const Listar_services = () => {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState('');
     const [servicos, setServicos] = useState([]);
-
+    const id_loja = (Cookies.get('id_loja'));
+    const token = Cookies.get('token');
     const handleFiltroSubmit = async (e) => {
       e.preventDefault();
-      const id_loja = (Cookies.get('id_loja'));
-      const token = Cookies.get('token');
       const servicoBody = {
         id_loja,
         nome,
@@ -43,6 +42,34 @@ const Listar_services = () => {
             }
       }
     }
+    const handleDeletarClick = async (id_servico) => {
+      const confirmarDelecao = window.confirm('Tem certeza que deseja deletar este serviço?');
+
+      if (confirmarDelecao) {
+          try {
+              const response = await axios.delete(`http://localhost:3000/servico/${id_servico}`, {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              });
+
+              if (response.status === 201) {
+                alert('Deletado com sucesso!')
+                  navigate('/servico/listar');
+                } 
+          } catch (error) {
+              console.error('Erro ao deletar servico:', error);
+
+              if (error.response && error.response.status === 401) {
+                  const data = error.response.data;
+                  alert(data.error);
+                  navigate('/login');
+              } else {
+                  alert('Erro ao deletar o servico. Por favor, tente novamente.');
+              }
+          }
+      }
+  };
     return(
       <div>
             <div className="mx-3 mt-4 shadow p-3 ">
@@ -112,9 +139,12 @@ const Listar_services = () => {
           <Link className="btn btn-secondary mx-1" to={`/servico/atualizar/${servico.id_servico}`}>
               Atualizar
           </Link>
-          <Link className="btn btn-danger mx-1" to={`/servico/deletar/${servico.id_servico}`}>
+          <button
+              className="btn btn-danger mx-1"
+              onClick={() => handleDeletarClick(servico.id_servico)}
+          >
               Deletar
-          </Link>
+          </button>
         </div>        
     </tr>
     ))}

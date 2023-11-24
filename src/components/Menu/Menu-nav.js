@@ -37,14 +37,13 @@ const menu_nav = () => {
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Relatório</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Agendamentos</a></li>
-                  <li><a class="dropdown-item" href="#">Quantidade de Agendamentos</a></li>
+                  <li><Link class="dropdown-item" to="/relatorio/agendamento">Quantidade de Agendamentos</Link></li>
                 </ul>
               </li>
             </ul>
           </div>
           <div class="d-flex">
-            <a class="btn btn-danger btn-sn" href="#">Sair</a>
+            <Link  to="/login" class="btn btn-danger btn-sn" >Sair</Link>
           </div>
         </div>
       </nav>
